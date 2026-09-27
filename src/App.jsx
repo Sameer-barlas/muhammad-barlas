@@ -5,11 +5,13 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import FlyCursor from "./components/FlyCursor";
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#070812] text-white">
       <Navbar />
+      <FlyCursor />
       <main>
         <Hero />
         <About />

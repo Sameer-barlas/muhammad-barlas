@@ -1,159 +1,59 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-const roles = [
-  "MERN Stack Developer",
-  "Cyber Security Expert",
-  "REST API Designer",
-  "Scalable System Architect",
-];
+const SCENE_URL = "https://my.spline.design/nexbotrobotcharacterconcept-W8PiQCWw9oAL5vEO7qlyLIIY/";
+const roles = ["MERN Stack Developer", "Cyber Security Enthusiast", "REST API Designer", "Scalable System Architect"];
 
 function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [text, setText] = useState("");
   const [deleting, setDeleting] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
-    let timeout;
+    const media = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
-    if (!deleting && text.length < currentRole.length) {
-      timeout = setTimeout(() => {
-        setText(currentRole.slice(0, text.length + 1));
-      }, 100);
-    } else if (!deleting && text.length === currentRole.length) {
-      timeout = setTimeout(() => setDeleting(true), 2000);
-    } else if (deleting && text.length > 0) {
-      timeout = setTimeout(() => {
-        setText(currentRole.slice(0, text.length - 1));
-      }, 50);
-    } else {
-      setDeleting(false);
-      setRoleIndex((roleIndex + 1) % roles.length);
-    }
+  useEffect(() => {
+    if (reduceMotion) { setText(roles[0]); return undefined; }
+    const role = roles[roleIndex];
+    const delay = !deleting && text.length < role.length ? 75 : deleting && text.length ? 35 : 1600;
+    const timer = window.setTimeout(() => {
+      if (!deleting && text.length < role.length) setText(role.slice(0, text.length + 1));
+      else if (!deleting) setDeleting(true);
+      else if (text.length) setText(role.slice(0, -1));
+      else { setDeleting(false); setRoleIndex((index) => (index + 1) % roles.length); }
+    }, delay);
+    return () => window.clearTimeout(timer);
+  }, [deleting, reduceMotion, roleIndex, text]);
 
-    return () => clearTimeout(timeout);
-  }, [text, deleting, roleIndex]);
+  const heroItem = { hidden: { opacity: 0, y: 26 }, visible: { opacity: 1, y: 0 } };
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
-    >
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 bg-grid" />
-      <div className="absolute top-20 -left-20 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-blob" />
-      <div
-        className="absolute bottom-20 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-blob"
-        style={{ animationDelay: "2s" }}
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl animate-blob"
-        style={{ animationDelay: "4s" }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-        {/* Left - Text Content */}
-        <div className="text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm text-slate-300">Available for work</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display mb-4 leading-tight">
-            Hi, I'm{" "}
-            <span className="gradient-text animate-gradient bg-[length:200%_200%]">
-              Muhammad Barlas
-            </span>
-          </h1>
-
-          <div className="text-xl sm:text-2xl text-slate-300 mb-6 h-8">
-            <span className="text-cyan-400">{"<"}</span>
-            <span className="text-white">{text}</span>
-            <span className="text-cyan-400">{" />"}</span>
-            <span className="inline-block w-0.5 h-6 bg-cyan-400 ml-1 animate-pulse align-middle" />
-          </div>
-
-          <p className="text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0">
-            Software Engineer at UET Lahore (5th Semester) crafting modern web
-            applications with the MERN stack, secure systems, and scalable
-            architectures.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <a href="#projects" className="btn-primary">
-              View My Work
-            </a>
-            <a href="#contact" className="btn-outline">
-              Get In Touch
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div className="flex gap-8 mt-12 justify-center lg:justify-start">
-            <div>
-              <div className="text-3xl font-bold gradient-text">5+</div>
-              <div className="text-sm text-slate-400">Projects</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div>
-              <div className="text-3xl font-bold gradient-text">3+</div>
-              <div className="text-sm text-slate-400">Technologies</div>
-            </div>
-            <div className="w-px bg-white/10" />
-            <div>
-              <div className="text-3xl font-bold gradient-text">100%</div>
-              <div className="text-sm text-slate-400">Dedication</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right - Profile Image Placeholder */}
-        <div className="flex justify-center lg:justify-end">
-          <div className="relative animate-float">
-            {/* Glow ring */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full opacity-30 blur-2xl animate-glow" />
-
-            {/* Profile circle */}
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 p-1">
-              <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
-                <div className="text-center">
-                  <div className="text-6xl sm:text-7xl font-bold gradient-text mb-2">
-                    MB
-                  </div>
-                  <div className="text-sm text-slate-400">Muhammad Barlas</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating badges */}
-            <div
-              className="absolute -top-4 -right-4 glass-card px-4 py-2 text-sm font-medium animate-float"
-              style={{ animationDelay: "1s" }}
-            >
-              🚀 MERN Stack
-            </div>
-            <div
-              className="absolute -bottom-4 -left-4 glass-card px-4 py-2 text-sm font-medium animate-float"
-              style={{ animationDelay: "2s" }}
-            >
-              🔐 Cyber Expert
-            </div>
-            <div
-              className="absolute top-1/2 -left-8 glass-card px-4 py-2 text-sm font-medium animate-float"
-              style={{ animationDelay: "3s" }}
-            >
-              ⚡ REST APIs
-            </div>
-          </div>
-        </div>
+    <section id="home" className="hero-section section-anchor">
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-glow hero-glow--one" aria-hidden="true" />
+      <div className="hero-glow hero-glow--two" aria-hidden="true" />
+      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl items-center gap-10 px-5 pb-16 pt-28 sm:px-8 lg:grid-cols-[1.02fr_.98fr] lg:gap-4 lg:pt-20">
+        <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.11 } } }} className="max-w-2xl text-center lg:text-left">
+          <motion.div variants={heroItem} className="availability-chip"><span className="availability-chip__dot" />Available for selected opportunities</motion.div>
+          <motion.p variants={heroItem} className="eyebrow mt-7">Hello, I’m</motion.p>
+          <motion.h1 variants={heroItem} className="hero-title mt-3">Muhammad <span className="gradient-text">Barlas.</span></motion.h1>
+          <motion.div variants={heroItem} className="hero-role mt-5" aria-label={roles[roleIndex]}><span className="text-cyan-300">&lt;</span><span>{text}</span><span className="text-cyan-300">/&gt;</span>{!reduceMotion && <span className="typing-cursor" aria-hidden="true" />}</motion.div>
+          <motion.p variants={heroItem} className="hero-copy mt-6">A 5th-semester Software Engineering student at UET Lahore, building considered MERN products, secure APIs, and systems designed to scale.</motion.p>
+          <motion.div variants={heroItem} className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start"><a href="#projects" className="btn-primary">Explore my work <span aria-hidden="true">↗</span></a><a href="#contact" className="btn-outline">Let’s talk <span aria-hidden="true">→</span></a></motion.div>
+          <motion.div variants={heroItem} className="hero-stats mt-12"><div><strong>05<span>+</span></strong><span>Projects built</span></div><div><strong>02<span>+</span></strong><span>Years learning</span></div><div><strong>100<span>%</span></strong><span>Intentional work</span></div></motion.div>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, scale: 0.94, x: 24 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }} className="hero-robot-wrap">
+          <div className="robot-stage" aria-label="Interactive 3D robot">{isDesktop && <iframe title="Interactive 3D robot" src={SCENE_URL} loading="eager" allow="fullscreen" />}</div>
+        </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
-          <div className="w-1 h-2 bg-white/40 rounded-full" />
-        </div>
-      </div>
+      <a href="#about" className="scroll-cue" aria-label="Scroll to About section"><span /></a>
     </section>
   );
 }

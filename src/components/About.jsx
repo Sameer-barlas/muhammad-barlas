@@ -1,98 +1,28 @@
+import Reveal from "./Reveal";
+
+const highlights = [
+  ["01", "Education", "Software Engineering at UET Lahore · 5th Semester"],
+  ["02", "MERN Stack", "Modern products with MongoDB, Express, React, and Node.js."],
+  ["03", "Security minded", "Secure API design, sound authentication, and robust systems."],
+  ["04", "REST APIs", "Clean, scalable architecture that makes products easier to grow."],
+];
+
 function About() {
-  const highlights = [
-    {
-      icon: "🎓",
-      title: "Education",
-      description: "Software Engineering at UET Lahore (5th Semester)",
-    },
-    {
-      icon: "💻",
-      title: "MERN Stack",
-      description:
-        "Building full-stack apps with MongoDB, Express, React & Node.js",
-    },
-    {
-      icon: "🔐",
-      title: "Cyber Expert",
-      description:
-        "Security-focused development & penetration testing knowledge",
-    },
-    {
-      icon: "⚡",
-      title: "REST APIs",
-      description: "Designing clean, scalable RESTful API architectures",
-    },
-  ];
-
   return (
-    <section id="about" className="relative py-24 overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-72 h-72 bg-indigo-600/10 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="section-title">
-          About <span className="gradient-text">Me</span>
-        </h2>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Info */}
-          <div>
-            <div className="glass-card p-8 mb-8">
-              <h3 className="text-2xl font-bold font-display mb-4">
-                Software Engineer &{" "}
-                <span className="gradient-text">Problem Solver</span>
-              </h3>
-              <p className="text-slate-400 leading-relaxed mb-4">
-                I'm a passionate software engineer currently pursuing my 5th
-                semester at UET Lahore. I specialize in building modern web
-                applications using the MERN stack, with a strong focus on
-                security, performance, and scalability.
-              </p>
-              <p className="text-slate-400 leading-relaxed">
-                As a cyber security enthusiast, I integrate security best
-                practices into every layer of development — from secure API
-                design to robust authentication systems.
-              </p>
-            </div>
-
-            {/* Quick facts */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="glass-card p-4">
-                <div className="text-2xl mb-1">📍</div>
-                <div className="text-sm font-medium">Location</div>
-                <div className="text-sm text-slate-400">Lahore, Pakistan</div>
-              </div>
-              <div className="glass-card p-4">
-                <div className="text-2xl mb-1">🎯</div>
-                <div className="text-sm font-medium">Focus</div>
-                <div className="text-sm text-slate-400">Scalable Systems</div>
-              </div>
-              <div className="glass-card p-4">
-                <div className="text-2xl mb-1">💼</div>
-                <div className="text-sm font-medium">Status</div>
-                <div className="text-sm text-slate-400">Open to Work</div>
-              </div>
-              <div className="glass-card p-4">
-                <div className="text-2xl mb-1">🚀</div>
-                <div className="text-sm font-medium">Experience</div>
-                <div className="text-sm text-slate-400">2+ Years</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right - Highlights */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            {highlights.map((item, index) => (
-              <div
-                key={index}
-                className="glass-card p-6 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
-                  {item.icon}
-                </div>
-                <h4 className="font-semibold mb-2">{item.title}</h4>
-                <p className="text-sm text-slate-400">{item.description}</p>
-              </div>
-            ))}
+    <section id="about" className="section-shell section-anchor">
+      <div className="section-aurora section-aurora--left" aria-hidden="true" />
+      <div className="section-container">
+        <Reveal><p className="eyebrow">01 / About</p><h2 className="section-title">Engineering with <span className="gradient-text">purpose.</span></h2></Reveal>
+        <div className="grid gap-6 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
+          <Reveal delay={0.08} className="premium-card premium-card--large">
+            <p className="text-sm font-medium text-cyan-200">The short version</p>
+            <h3 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">Software engineer &amp; thoughtful problem solver.</h3>
+            <p className="card-copy mt-6">I’m a passionate software engineer currently pursuing my 5th semester at UET Lahore. I specialise in modern MERN web applications, with a focus on security, performance, and scalability.</p>
+            <p className="card-copy mt-4">My interest in cyber security informs every layer of my work—from resilient authentication flows to secure API design.</p>
+            <div className="about-facts mt-9"><div><span>Based in</span><strong>Lahore, Pakistan</strong></div><div><span>Currently</span><strong>Open to work</strong></div><div><span>Focus</span><strong>Scalable systems</strong></div></div>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            {highlights.map(([number, title, description], index) => <Reveal key={title} delay={0.1 + index * 0.07}><article className="premium-card feature-card"><span className="feature-number">{number}</span><div><h3>{title}</h3><p>{description}</p></div></article></Reveal>)}
           </div>
         </div>
       </div>

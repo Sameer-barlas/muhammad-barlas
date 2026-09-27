@@ -1,0 +1,183 @@
+/* ============================================================
+   ROBOT CHASE — Scoped custom drone cursor + static robot
+   This stylesheet ONLY affects elements inside the hero's
+   right-side avatar container (id="drone-chase-area").
+   Everything else on the page keeps the default cursor/layout.
+   ============================================================ */
+
+/* --- CONFIG FLAG ---
+   Set to false to disable the entire robot chase effect
+   (drone cursor + robot animation) without touching any markup. */
+#drone-chase-area {
+  /* The container becomes the positioning context for the
+     drone cursor and robot overlays. */
+  position: relative;
+  cursor: none; /* Hide default cursor ONLY inside this container */
+}
+
+/* Hide the custom drone for coarse pointers / touch devices.
+   The robot will just stand in its idle pose. */
+@media (pointer: coarse) {
+  #drone-chase-area {
+    cursor: auto;
+  }
+}
+
+/* Respect users who prefer reduced motion: disable the effect. */
+@media (prefers-reduced-motion: reduce) {
+  #drone-chase-area {
+    cursor: auto;
+  }
+}
+
+/* ============================================================
+   DRONE CURSOR (scoped) — DO NOT MODIFY
+   A small quadcopter SVG that follows the mouse inside the
+   container, with a rotating propeller and purple-blue glow.
+   ============================================================ */
+.drone-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  pointer-events: none; /* never intercept clicks */
+  z-index: 5;
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.8))
+          drop-shadow(0 0 12px rgba(34, 211, 238, 0.5));
+}
+
+/* Rotating propellers on the drone */
+.drone-cursor .drone-prop {
+  animation: drone-spin 0.25s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box; /* rotate around the element's own box */
+}
+
+@keyframes drone-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   ROBOT (scoped)
+   A HUGE realistic robot standing STRAIGHT and STATIC. It does
+   NOT move its body — only its HEAD (face), ARMS (hands), and
+   ELBOWS rotate to track the drone/fly.
+
+   Position is set by JS via inline transform (centered).
+
+   NOTE: There are NO CSS `transition: transform` rules on the
+   head/arms/elbows — the JS requestAnimationFrame loop LERPS
+   the angles every frame, so a CSS transition would fight it
+   and cause lag. Smoothing is handled entirely in JS.
+   ============================================================ */
+.robot-chaser {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 440px;  /* HUGE realistic robot — main visual focus */
+  height: 440px;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.7))
+          drop-shadow(0 0 12px rgba(99, 102, 241, 0.4));
+}
+
+/* Scale the inner SVG to fill the robot container —
+   the SVG viewBox is 48x48, rendered at 440px here. */
+.robot-chaser svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- IDLE BREATHING ---
+   When the mouse is outside the container (or on touch /
+   reduced motion), the whole robot gently floats up and down
+   in a subtle "breathing" motion. The .idle class is added by
+   JS when the mouse leaves and removed when it enters. */
+.robot-chaser.idle {
+  animation: robot-breathe 3.5s ease-in-out infinite;
+}
+
+@keyframes robot-breathe {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ============================================================
+   HEAD — face points toward the drone/fly
+   ------------------------------------------------------------
+   The head group rotates around the neck. `transform-box:
+   fill-box` makes the origin relative to the head's own
+   bounding box; `transform-origin: bottom center` places the
+   pivot at the neck joint (bottom of the head).
+
+   Rotation angle comes from JS via the --head-rot custom
+   property (lerped + clamped to ±40°).
+   ============================================================ */
+.robot-head {
+  transform-box: fill-box;
+  transform-origin: bottom center; /* pivot at the neck */
+  transform: rotate(var(--head-rot, 0deg)); /* idle: straight ahead */
+}
+
+/* ============================================================
+   ARTICULATED ARMS — hands follow the drone/fly
+   ------------------------------------------------------------
+   Each arm group rotates around its own shoulder (pivot point).
+   `transform-box: fill-box` makes the origin relative to the
+   arm's own bounding box; `transform-origin: top center` places
+   the pivot at the shoulder joint.
+
+   Rotation angle comes from JS via custom properties:
+     --arm-l-rot (left arm, deg)
+     --arm-r-rot (right arm, deg)
+   Only the arm closer to the drone reaches; the other rests.
+   ============================================================ */
+.robot-arm {
+  transform-box: fill-box;
+  transform-origin: top center; /* pivot at the shoulder */
+}
+
+.robot-arm-left {
+  transform: rotate(var(--arm-l-rot, 30deg)); /* relaxed idle pose */
+}
+
+.robot-arm-right {
+  transform: rotate(var(--arm-r-rot, -30deg)); /* relaxed idle pose */
+}
+
+/* ============================================================
+   ELBOWS — natural reaching bend
+   ------------------------------------------------------------
+   Each elbow group sits inside its arm and rotates around the
+   elbow joint (top of the forearm). `transform-origin: top
+   center` places the pivot at the elbow.
+
+   Rotation angle comes from JS via custom properties:
+     --elbow-l-rot (left elbow, deg)
+     --elbow-r-rot (right elbow, deg)
+   The reaching arm's elbow bends slightly (18°) for a natural
+   look; the resting arm's elbow stays straight.
+   ============================================================ */
+.robot-elbow {
+  transform-box: fill-box;
+  transform-origin: top center; /* pivot at the elbow */
+}
+
+.robot-elbow-left {
+  transform: rotate(var(--elbow-l-rot, 0deg)); /* straight when idle */
+}
+
+.robot-elbow-right {
+  transform: rotate(var(--elbow-r-rot, 0deg)); /* straight when idle */
+}
+
+/* Hide the chase overlays entirely on touch / reduced motion —
+   the robot just stands in its idle pose. */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .drone-cursor {
+    display: none;
+  }
+}

@@ -1,105 +1,17 @@
+import Reveal from "./Reveal";
+
 const projects = [
-  {
-    title: "MERN E-Commerce Platform",
-    description:
-      "Full-featured e-commerce application with product management, cart, secure payments, and admin dashboard.",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    gradient: "from-indigo-500 via-purple-500 to-pink-500",
-    icon: "🛒",
-  },
-  {
-    title: "Secure REST API Service",
-    description:
-      "Production-ready RESTful API with JWT authentication, role-based access control, rate limiting, and input validation.",
-    tags: ["Node.js", "Express", "JWT", "Security"],
-    gradient: "from-cyan-500 via-teal-500 to-emerald-500",
-    icon: "🔐",
-  },
-  {
-    title: "Real-Time Chat Application",
-    description:
-      "Real-time messaging app with WebSockets, typing indicators, online presence, and read receipts.",
-    tags: ["React", "Socket.io", "Node.js", "MongoDB"],
-    gradient: "from-purple-500 via-fuchsia-500 to-rose-500",
-    icon: "💬",
-  },
-  {
-    title: "Scalable System Design",
-    description:
-      "Architecture design for high-traffic systems with load balancing, caching, and database optimization strategies.",
-    tags: ["System Design", "Redis", "Microservices"],
-    gradient: "from-amber-500 via-orange-500 to-red-500",
-    icon: "🏗️",
-  },
+  { number: "01", title: "MERN E-Commerce Platform", description: "Full-featured commerce experience with product management, cart flows, secure payments, and an admin dashboard.", tags: ["React", "Node.js", "MongoDB", "Express"], tone: "project-tone--violet" },
+  { number: "02", title: "Secure REST API Service", description: "Production-ready API architecture with JWT authentication, role-based access, rate limits, and input validation.", tags: ["Node.js", "Express", "JWT", "Security"], tone: "project-tone--cyan" },
+  { number: "03", title: "Real-Time Chat Application", description: "A responsive messaging application with WebSockets, typing states, presence indicators, and read receipts.", tags: ["React", "Socket.io", "Node.js", "MongoDB"], tone: "project-tone--pink" },
+  { number: "04", title: "Scalable System Design", description: "A system design exploration for high-traffic products using load balancing, caching, and database optimisation.", tags: ["System Design", "Redis", "Microservices"], tone: "project-tone--orange" },
 ];
 
 function Projects() {
-  return (
-    <section id="projects" className="relative py-24 overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-indigo-600/10 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="section-title">
-          Featured <span className="gradient-text">Projects</span>
-        </h2>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="glass-card overflow-hidden group hover:-translate-y-2 transition-all duration-300"
-            >
-              {/* Gradient placeholder image */}
-              <div
-                className={`h-40 bg-gradient-to-br ${project.gradient} relative flex items-center justify-center`}
-              >
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all" />
-                <span className="text-6xl filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  {project.icon}
-                </span>
-                <div className="absolute top-3 right-3 bg-black/40 backdrop-blur px-2 py-1 rounded-full text-xs">
-                  {project.tags[0]}
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="font-bold font-display text-lg mb-2 group-hover:text-cyan-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-slate-400 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-4 text-sm">
-                  <a
-                    href="#"
-                    className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium flex items-center gap-1"
-                  >
-                    View Project <span aria-hidden>→</span>
-                  </a>
-                  <a
-                    href="#"
-                    className="text-slate-400 hover:text-white transition-colors font-medium"
-                  >
-                    GitHub{" "}
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="projects" className="section-shell section-anchor"><div className="section-aurora section-aurora--right" aria-hidden="true" /><div className="section-container">
+    <Reveal><p className="eyebrow">03 / Selected work</p><div className="section-heading-row"><h2 className="section-title">Built to be <span className="gradient-text">useful.</span></h2><p>Concepts and builds that unite clear UX with maintainable engineering.</p></div></Reveal>
+    <div className="project-grid mt-12">{projects.map((project, index) => <Reveal key={project.title} delay={index * 0.08}><article className={`project-card ${project.tone}`}><div className="project-visual"><span>{project.number}</span><div className="project-orb" /></div><div className="project-content"><div className="flex items-center justify-between gap-4"><p className="eyebrow !text-[10px]">Case study</p><span aria-hidden="true" className="project-arrow">↗</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="project-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href="#contact" className="project-link">Discuss a similar build <span aria-hidden="true">→</span></a></div></article></Reveal>)}</div>
+  </div></section>;
 }
 
 export default Projects;
