@@ -4,10 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 const SCENE_URL =
   "https://my.spline.design/nexbotrobotcharacterconcept-W8PiQCWw9oAL5vEO7qlyLIIY/";
 const roles = [
-  "MERN Stack Developer",
-  "Cyber Security Enthusiast",
-  "REST API Designer",
-  "Scalable System Architect",
+  "MERN Stack Developer & AI Engineer",
+  "RAG Systems & LLM Specialist",
+  "Scalable REST API Architect",
+  "Full-Stack Web Engineer",
 ];
 
 function Hero() {
@@ -91,8 +91,7 @@ function Hero() {
           </motion.div>
           <motion.p variants={heroItem} className="hero-copy mt-6">
             A 5th-semester Software Engineering student at UET Lahore, building
-            considered MERN products, secure APIs, and systems designed to
-            scale.
+            considered MERN products, intelligent AI &amp; RAG systems, secure APIs, and architectures designed to scale.
           </motion.p>
           <motion.div
             variants={heroItem}
