@@ -12,21 +12,30 @@ const projects = [
   {
     id: "fitverse",
     number: "01",
-    title: "FitVerse — Smart Workout Planner & Tracker",
-    category: "Full-Stack Web App",
+    title: "FitVerse — AI Workout Planner & RAG Fitness Coach",
+    category: "AI & Full-Stack MERN",
     filterCategory: "mern",
     domain: "fitversee.vercel.app",
     liveUrl: "https://fitversee.vercel.app",
     image: "/projects/fitverse.png",
     description:
-      "A responsive, full-featured digital fitness companion designed for crafting custom training splits, logging daily sets/reps in real time, and visualizing long-term performance gains with interactive milestone tracking.",
+      "An intelligent, full-stack fitness platform featuring 'Coach Alex' — an integrated RAG-based AI fitness coach powered by Gemini API with domain knowledge retrieval across 76 exercise guides and 36 deterministic workout plans. Engineered with server-evaluated BMI/age-band stratification, live workout logging with rest timers, and interactive volume/streak analytics.",
     highlights: [
-      "Dynamic routine builder with exercise database & target muscle mapping",
-      "Live workout logger with interactive set, rep, and weight counters",
-      "Persistent workout analytics, milestone streaks, and responsive dark UI",
+      "RAG AI Fitness Coach (Coach Alex): Grounded semantic retrieval across 76 exercise guides & 36 custom splits with tokenized BM25 search, synonym expansion, and source citations",
+      "Algorithmic Plan Personalization: Deterministic routine allocation dynamically calculated from server-side BMI, age-band, and experience classifications",
+      "Live Session Tracker & Analytics: Interactive set/rep/weight logging with rest interval timers and multi-metric visual progress tracking powered by Recharts",
     ],
-    tags: ["React.js", "Tailwind CSS", "JavaScript", "Vite", "PWA Ready"],
-    badge: "Live Production",
+    tags: [
+      "React 19",
+      "Node.js",
+      "Express 5",
+      "MongoDB",
+      "RAG Architecture",
+      "Gemini API",
+      "Tailwind CSS",
+      "Recharts",
+    ],
+    badge: "RAG AI • Live",
     badgeColor: "emerald",
     featured: true,
   },
@@ -237,7 +246,7 @@ function Projects() {
                         className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                       {/* Gradient Scrim */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#080c1d] via-transparent to-transparent opacity-75" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#080c1d] via-transparent to-transparent opacity-40" />
 
                       {/* Hover Overlay Button */}
                       {project.liveUrl && (
