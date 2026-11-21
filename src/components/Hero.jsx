@@ -58,17 +58,17 @@ function Hero() {
   return (
     <section id="home" className="relative min-h-[100svh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="ambient-glow ambient-glow--violet -top-32 -left-32 opacity-20" aria-hidden="true" />
-      <div className="ambient-glow ambient-glow--cyan top-1/3 -right-32 opacity-15" aria-hidden="true" />
+      <div className="ambient-glow ambient-glow--violet -top-32 -left-32 opacity-25" aria-hidden="true" />
+      <div className="ambient-glow ambient-glow--cyan top-1/4 -right-20 opacity-20" aria-hidden="true" />
 
       <div className="section-container">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8 xl:gap-12">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] xl:gap-12">
           {/* Left Column: Core Narrative & Actions */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="flex flex-col items-center text-center lg:items-start lg:text-left"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left z-10"
           >
             {/* Live Availability Badge */}
             <motion.div variants={heroItem} className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono shadow-[0_0_20px_rgba(16,185,129,0.15)]">
@@ -83,7 +83,7 @@ function Hero() {
             </motion.p>
 
             {/* Giant Title */}
-            <motion.h1 variants={heroItem} className="mt-3 font-display text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05]">
+            <motion.h1 variants={heroItem} className="mt-3 font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.05]">
               Muhammad <br className="hidden sm:inline" />
               <span className="gradient-text">Barlas.</span>
             </motion.h1>
@@ -151,57 +151,57 @@ function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Interactive 3D Cybernetic Robot */}
+          {/* Right Column: Seamlessly Merged 3D Robot in Header */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative hidden lg:flex flex-col items-center justify-center"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative hidden lg:flex items-center justify-center w-full"
           >
-            {/* High-Tech HUD Viewport Frame */}
-            <div className="relative w-full max-w-[560px] h-[580px] rounded-3xl overflow-hidden bg-gradient-to-b from-[#0a0f26] to-[#040612] border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(56,189,248,0.15)] backdrop-blur-xl">
-              {/* HUD Corner Brackets */}
-              <span className="hud-corner hud-corner--tl" />
-              <span className="hud-corner hud-corner--tr" />
-              <span className="hud-corner hud-corner--bl" />
-              <span className="hud-corner hud-corner--br" />
+            {/* Ambient Aura Glow Behind Robot */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+              <div className="w-[420px] h-[420px] rounded-full bg-gradient-to-tr from-cyan-500/20 via-indigo-600/20 to-purple-500/15 blur-3xl" />
+            </div>
 
-              {/* HUD Header Telemetry Bar */}
-              <div className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-5 py-3 bg-[#060918]/80 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
-                <div className="flex items-center gap-2 text-cyan-300">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                  <span>3D_INTERACTIVE_CORE</span>
-                </div>
-                <div className="text-slate-400 tracking-wider">
-                  UET.LAHORE // ENG_V5.0
-                </div>
-              </div>
+            {/* Seamless 3D Stage (No outer border or box) */}
+            <div className="relative w-full max-w-[580px] h-[580px] xl:h-[620px] overflow-hidden flex items-center justify-center">
+              {isDesktop && (
+                <iframe
+                  title="Interactive 3D Robot"
+                  src={SCENE_URL}
+                  loading="eager"
+                  allow="fullscreen"
+                  className="w-[124%] h-[124%] -translate-x-[4%] -translate-y-[4%] border-0 bg-transparent filter contrast-[1.08] saturate-[1.2]"
+                />
+              )}
 
-              {/* Spline Interactive Robot Canvas */}
-              <div className="relative w-full h-full pt-10 pb-8 flex items-center justify-center">
-                {isDesktop && (
-                  <iframe
-                    title="Interactive 3D robot"
-                    src={SCENE_URL}
-                    loading="eager"
-                    allow="fullscreen"
-                    className="w-[114%] h-[114%] -translate-x-[2%] -translate-y-[2%] border-0 bg-transparent filter contrast-[1.05] saturate-[1.15]"
-                  />
-                )}
-                {/* Ambient backlighting glow inside stage */}
-                <div className="absolute -bottom-10 inset-x-12 h-36 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
-              </div>
+              {/* Edge gradients to seamlessly merge the canvas into the website background */}
+              {/* Bottom blend */}
+              <div
+                className="absolute inset-x-0 bottom-0 h-28 pointer-events-none bg-gradient-to-t from-[#05070f] via-[#05070f]/80 to-transparent z-10"
+                aria-hidden="true"
+              />
+              {/* Left blend */}
+              <div
+                className="absolute inset-y-0 left-0 w-16 pointer-events-none bg-gradient-to-r from-[#05070f] to-transparent z-10"
+                aria-hidden="true"
+              />
+              {/* Right blend */}
+              <div
+                className="absolute inset-y-0 right-0 w-16 pointer-events-none bg-gradient-to-l from-[#05070f] to-transparent z-10"
+                aria-hidden="true"
+              />
+              {/* Top blend */}
+              <div
+                className="absolute inset-x-0 top-0 h-16 pointer-events-none bg-gradient-to-b from-[#05070f] to-transparent z-10"
+                aria-hidden="true"
+              />
 
-              {/* HUD Footer status badge */}
-              <div className="absolute bottom-3 inset-x-4 z-20 flex items-center justify-between px-4 py-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono text-slate-300">
-                <span className="flex items-center gap-2 text-cyan-300">
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                  </svg>
-                  Interactive 3D Entity
-                </span>
-                <span className="text-slate-400 text-[10px]">DRAG TO INTERACT</span>
-              </div>
+              {/* Solid Anti-Watermark Shield: Completely covers and disables any bottom-right Spline badge/link */}
+              <div
+                className="absolute bottom-0 right-0 w-52 h-20 z-20 pointer-events-auto bg-gradient-to-l from-[#05070f] via-[#05070f] to-transparent"
+                aria-hidden="true"
+              />
             </div>
           </motion.div>
         </div>

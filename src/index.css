@@ -330,38 +330,6 @@ body::after {
   animation: float-subtle 5s ease-in-out infinite;
 }
 
-/* Robot container framing */
-.hud-corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-  z-index: 20;
-}
-.hud-corner--tl {
-  top: 10px;
-  left: 10px;
-  border-top: 2px solid #38bdf8;
-  border-left: 2px solid #38bdf8;
-}
-.hud-corner--tr {
-  top: 10px;
-  right: 10px;
-  border-top: 2px solid #38bdf8;
-  border-right: 2px solid #38bdf8;
-}
-.hud-corner--bl {
-  bottom: 10px;
-  left: 10px;
-  border-bottom: 2px solid #8b5cf6;
-  border-left: 2px solid #8b5cf6;
-}
-.hud-corner--br {
-  bottom: 10px;
-  right: 10px;
-  border-bottom: 2px solid #8b5cf6;
-  border-right: 2px solid #8b5cf6;
-}
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
