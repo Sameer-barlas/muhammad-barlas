@@ -126,14 +126,17 @@ function Projects() {
 
   return (
     <section id="projects" className="section-shell section-anchor">
-      <div className="section-aurora section-aurora--right" aria-hidden="true" />
+      {/* Background ambient lighting */}
+      <div className="ambient-glow ambient-glow--violet -top-32 right-12 opacity-15" aria-hidden="true" />
+      <div className="ambient-glow ambient-glow--cyan bottom-10 -left-20 opacity-10" aria-hidden="true" />
+
       <div className="section-container">
         {/* Section Header */}
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-2 border-b border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-white/10">
             <div>
               <p className="eyebrow">03 / Featured Work</p>
-              <h2 className="section-title mt-2">
+              <h2 className="section-title">
                 Engineered for <span className="gradient-text">impact.</span>
               </h2>
               <p className="section-lede mt-3 max-w-2xl">
@@ -148,14 +151,16 @@ function Projects() {
                   key={cat.id}
                   type="button"
                   onClick={() => setActiveTab(cat.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-300 flex items-center gap-1.5 ${
+                  className={`px-4 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 flex items-center gap-2 ${
                     activeTab === cat.id
-                      ? "bg-cyan-400/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_20px_rgba(56,189,248,0.3)]"
                       : "bg-white/[0.04] text-slate-400 border border-white/10 hover:text-white hover:bg-white/[0.08]"
                   }`}
                 >
                   <span>{cat.label}</span>
-                  <span className="text-[10px] opacity-60">({cat.count})</span>
+                  <span className="text-[10px] opacity-70 px-1.5 py-0.5 rounded-full bg-white/10">
+                    {cat.count}
+                  </span>
                 </button>
               ))}
             </div>
@@ -174,7 +179,7 @@ function Projects() {
                 className={isWideCard ? "lg:col-span-2" : ""}
               >
                 <article
-                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c0e1a]/90 backdrop-blur-xl transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(34,211,238,0.12)] flex flex-col ${
+                  className={`glass-card overflow-hidden group flex flex-col ${
                     isWideCard ? "lg:flex-row lg:items-stretch" : ""
                   }`}
                 >
@@ -187,16 +192,16 @@ function Projects() {
                     }`}
                   >
                     {/* Simulated Browser Chrome Header */}
-                    <div className="flex items-center justify-between px-4 py-2.5 bg-[#090b14] border-b border-white/10 text-xs">
+                    <div className="flex items-center justify-between px-4 py-3 bg-[#080b18] border-b border-white/10 text-xs">
                       {/* macOS Window Controls */}
                       <div className="flex items-center gap-1.5" aria-hidden="true">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/80 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/80 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57] inline-block shadow-[0_0_6px_rgba(255,95,87,0.5)]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e] inline-block shadow-[0_0_6px_rgba(254,188,46,0.5)]" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840] inline-block shadow-[0_0_6px_rgba(40,200,64,0.5)]" />
                       </div>
 
                       {/* Mock URL Bar */}
-                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-black/50 border border-white/10 text-[11px] font-mono text-slate-300 max-w-[220px] sm:max-w-xs truncate">
+                      <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-black/60 border border-white/10 text-[11px] font-mono text-slate-300 max-w-[210px] sm:max-w-xs truncate">
                         <svg
                           className="w-3 h-3 text-cyan-400 shrink-0"
                           fill="none"
@@ -211,20 +216,20 @@ function Projects() {
                           />
                         </svg>
                         <span className="truncate">{project.domain}</span>
-                        <span className="relative flex h-2 w-2 shrink-0 ml-1">
+                        <span className="relative flex h-2 w-2 shrink-0 ml-auto">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                         </span>
                       </div>
 
                       {/* Badge */}
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.06] text-cyan-300 border border-cyan-400/20">
+                      <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-400/30">
                         {project.badge}
                       </span>
                     </div>
 
-                    {/* Screenshot Preview with Smooth Zoom */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#070812] flex-1">
+                    {/* Screenshot Preview Container */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#060812] flex-1">
                       <img
                         src={project.image}
                         alt={`${project.title} Preview`}
@@ -232,7 +237,7 @@ function Projects() {
                         className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                       {/* Gradient Scrim */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e1a] via-transparent to-transparent opacity-60" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#080c1d] via-transparent to-transparent opacity-75" />
 
                       {/* Hover Overlay Button */}
                       {project.liveUrl && (
@@ -243,7 +248,7 @@ function Projects() {
                           className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px]"
                           aria-label={`Open live site for ${project.title}`}
                         >
-                          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500 text-black font-semibold text-xs tracking-wide shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-teal-300 text-black font-display font-bold text-xs tracking-tight shadow-[0_0_25px_rgba(56,189,248,0.6)] transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                             Launch Live Site
                             <span aria-hidden="true">↗</span>
                           </span>
@@ -254,7 +259,7 @@ function Projects() {
 
                   {/* Card Content & Details */}
                   <div
-                    className={`p-6 sm:p-7 flex flex-col justify-between flex-1 ${
+                    className={`p-6 sm:p-8 flex flex-col justify-between flex-1 ${
                       isWideCard ? "lg:w-1/2" : ""
                     }`}
                   >
@@ -262,7 +267,7 @@ function Projects() {
                       {/* Card Header Row */}
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-mono text-xs font-semibold tracking-wider">
+                          <span className="text-cyan-400 font-mono text-xs font-bold tracking-wider">
                             {project.number}
                           </span>
                           <span className="text-white/20 font-mono text-xs">/</span>
@@ -288,17 +293,20 @@ function Projects() {
                         {project.title}
                       </h3>
 
-                      {/* Featured Short Description */}
+                      {/* Description */}
                       <p className="mt-3 text-sm text-slate-300 leading-relaxed font-sans">
                         {project.description}
                       </p>
 
                       {/* Key Highlights Bulleted List */}
-                      <div className="mt-4 pt-4 border-t border-white/[0.08] space-y-2">
+                      <div className="mt-5 p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-2.5">
+                        <span className="block text-[10px] font-mono uppercase tracking-wider text-cyan-300">
+                          Key Architectural Highlights
+                        </span>
                         {project.highlights.map((item) => (
                           <div
                             key={item}
-                            className="flex items-start gap-2.5 text-xs text-slate-300/90 leading-normal"
+                            className="flex items-start gap-2.5 text-xs text-slate-300 leading-normal"
                           >
                             <span className="text-cyan-400 text-xs mt-0.5 shrink-0">✓</span>
                             <span>{item}</span>
@@ -311,7 +319,7 @@ function Projects() {
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/10 text-indigo-200/90 group-hover:border-cyan-400/20 transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-white/[0.04] border border-white/10 text-indigo-200 group-hover:border-cyan-400/30 transition-colors"
                           >
                             {tag}
                           </span>
@@ -320,13 +328,13 @@ function Projects() {
                     </div>
 
                     {/* Footer Actions */}
-                    <div className="mt-7 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                    <div className="mt-8 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
                       {project.liveUrl ? (
                         <a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 hover:from-cyan-300 hover:to-teal-200 transition-all shadow-[0_4px_16px_rgba(34,211,238,0.3)] hover:shadow-[0_6px_22px_rgba(34,211,238,0.45)] transform hover:-translate-y-0.5"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold font-display tracking-tight text-black bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 hover:from-cyan-300 hover:to-teal-200 transition-all shadow-[0_4px_20px_rgba(56,189,248,0.35)] hover:shadow-[0_6px_25px_rgba(56,189,248,0.5)] transform hover:-translate-y-0.5"
                         >
                           <span>Live Preview</span>
                           <span aria-hidden="true">↗</span>
@@ -334,7 +342,7 @@ function Projects() {
                       ) : (
                         <a
                           href="#contact"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-amber-400 via-orange-300 to-amber-300 hover:from-amber-300 hover:to-orange-200 transition-all shadow-[0_4px_16px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_22px_rgba(251,191,36,0.45)] transform hover:-translate-y-0.5"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold font-display tracking-tight text-black bg-gradient-to-r from-amber-400 via-orange-300 to-amber-300 hover:from-amber-300 hover:to-orange-200 transition-all shadow-[0_4px_20px_rgba(251,191,36,0.35)] hover:shadow-[0_6px_25px_rgba(251,191,36,0.5)] transform hover:-translate-y-0.5"
                         >
                           <span>Explore API Specs</span>
                           <span aria-hidden="true">↗</span>
@@ -343,7 +351,7 @@ function Projects() {
 
                       <a
                         href="#contact"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-300 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-300 hover:text-cyan-300 transition-colors"
                       >
                         <span>Discuss this build</span>
                         <span aria-hidden="true">→</span>
