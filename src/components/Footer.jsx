@@ -4,8 +4,12 @@ function Footer() {
       <div className="section-container py-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
         {/* Brand identity */}
         <a href="#home" className="flex items-center gap-3 group" aria-label="Muhammad Barlas Home">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 via-indigo-600/30 to-purple-600/20 border border-cyan-400/30 flex items-center justify-center font-mono font-bold text-xs text-cyan-300">
-            MB
+          <div className="w-9 h-9 rounded-full overflow-hidden border border-cyan-400/40 flex-shrink-0 bg-[#090e24]">
+            <img
+              src="/profile.jpg"
+              alt="Muhammad Barlas"
+              className="w-full h-full object-cover object-[center_20%]"
+            />
           </div>
           <div className="flex flex-col text-left">
             <strong className="font-display text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">

@@ -29,13 +29,19 @@ function Navbar() {
         }`}
       >
         {/* Brand Identity */}
-        <a href="#home" className="flex items-center gap-3 group" aria-label="Muhammad Barlas Home">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 via-indigo-600/30 to-purple-600/20 border border-cyan-400/40 shadow-[0_0_15px_rgba(56,189,248,0.25)] group-hover:scale-105 group-hover:border-cyan-300 transition-all duration-300">
-            <span className="font-mono font-bold text-sm text-cyan-300 tracking-wider">MB</span>
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#05070f] shadow-[0_0_8px_#34d399]" />
+        <a href="#home" className="flex items-center gap-3.5 group" aria-label="Muhammad Barlas Home">
+          <div className="relative flex-shrink-0">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-[0_0_18px_rgba(56,189,248,0.35)] group-hover:scale-105 group-hover:border-cyan-300 transition-all duration-300 bg-[#090e24]">
+              <img
+                src="/profile.jpg"
+                alt="Muhammad Barlas"
+                className="w-full h-full object-cover object-[center_20%] group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#05070f] shadow-[0_0_8px_#34d399]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-bold text-sm tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+            <span className="font-display font-bold text-sm sm:text-base tracking-tight text-white group-hover:text-cyan-300 transition-colors">
               Muhammad Barlas
             </span>
             <span className="text-[10px] font-mono font-medium text-cyan-400/80 tracking-wide uppercase">

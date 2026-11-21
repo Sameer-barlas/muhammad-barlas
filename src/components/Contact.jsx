@@ -28,7 +28,7 @@ function Contact() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
   const copyEmail = () => {
-    navigator.clipboard?.writeText("muhammadbarlas@example.com");
+    navigator.clipboard?.writeText("2024cs517@student.uet.edu.pk");
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -88,10 +88,10 @@ function Contact() {
                         Email Address
                       </span>
                       <a
-                        href="mailto:muhammadbarlas@example.com"
+                        href="mailto:2024cs517@student.uet.edu.pk"
                         className="text-xs sm:text-sm font-semibold text-slate-100 hover:text-cyan-300 transition-colors"
                       >
-                        muhammadbarlas@example.com
+                        2024cs517@student.uet.edu.pk
                       </a>
                     </div>
                   </div>
@@ -171,7 +171,7 @@ function Contact() {
                   Message Prepared!
                 </h4>
                 <p className="text-sm text-slate-300 max-w-md mx-auto">
-                  Thank you for reaching out. Your message is ready to send once your form endpoint is plugged in. You can also contact directly at <a href="mailto:muhammadbarlas@example.com" className="text-cyan-300 underline">muhammadbarlas@example.com</a>.
+                  Thank you for reaching out. Your message is ready to send once your form endpoint is plugged in. You can also contact directly at <a href="mailto:2024cs517@student.uet.edu.pk" className="text-cyan-300 underline">2024cs517@student.uet.edu.pk</a>.
                 </p>
                 <button
                   type="button"
